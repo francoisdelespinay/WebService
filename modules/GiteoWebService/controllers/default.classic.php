@@ -13,12 +13,25 @@ class defaultCtrl extends jController {
     *
     */
     function index() {
-        $rep = $this->getResponse('html');
+        
+        //$monURL = jUrl::get("GiteoWebService~index@classic", array("param"=>""));
+        
+        $PromotionFactory=jDao::get("promotion");
+        $Promotion2Factory = jDao::get("promotion2");
+        $response = $this->getResponse('json');
+        $listOfAllPromotion=$PromotionFactory->findAll();
+        $listOfAllPromotion2=$Promotion2Factory->findAll();
+        
 
-        // this is a call for the 'welcome' zone after creating a new application
-        // remove this line !
-        $rep->body->assignZone('MAIN', 'jelix~check_install');
+        $response->data = array();
+        
+        foreach ($listOfAllPromotion as $promo) {
+        $response->data[] = array('id_promotion' => $promo->id_promotion,'prm_code'=>$promo->prm_code ,'prm_comment' => $promo->prm_comment);
+               
+        }
+        //var_dump($monURL);
+        //var_dump($response); 
 
-        return $rep;
+        return $response;
     }
 }
