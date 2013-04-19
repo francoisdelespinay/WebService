@@ -10,7 +10,7 @@ default = "GiteoWebService"
 driver="mysql"
 
 ; For most of drivers:
-database="jelix"
+database="dbtest"
 host= "localhost"
 user= "root"
 password=
